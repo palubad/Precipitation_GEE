@@ -14,6 +14,7 @@ The following eight global and quasi-global precipitation datasets were selected
 Precipitation datasets available in half-hourly, hourly and three-hourly temporal resolution were aggregated to daily composites in GEE. For these datasets, the starting and ending period was set from 6:00 UTC to 6:00 UTC the next day, to meet the measurement period of the in-situ gauge stations of the CHMI. For each dataset, time series were then extracted and exported at a daily time step at the locations of the rain gauge stations for the period 2001-2021.
 
 ![image](https://github.com/palubad/Precipitation_GEE/assets/33784015/bc95b4e2-1d25-4926-aecc-75978a2c9cff)
+
 Table I. Characteristics of the used datasets.
 
 Comment regarding the attached data in the _data_ folder:
