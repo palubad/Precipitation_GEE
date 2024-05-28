@@ -1,4 +1,6 @@
 /*
+###########################################################################################
+
 Author of the code: Daniel Paluba
 (For more info contact: palubad@natur.cuni.cz)
 
@@ -9,17 +11,20 @@ in any publications and outputs derived from them:
  
     Paluba, D., V., Bližňák, M., Müller, P., Štych (2024): 
     Evaluation of Precipitation Datasets Available in Google Earth Engine on a Daily Basis for Czechia.
-    Submitted to the Conference of the IEEE IGARSS 2024.
-
-
-###########################################################################################################
+    Submitted to the IEEE IGARSS 2024 Conference proceedings.
+    
+###########################################################################################
 */
 
-
-// CAUTION: RUN WILL REQUIRE MUCH TIME DUE TO THE FOR LOOP. Read the instructions below.
+// ########################################################################################
+// CAUTION: RUNNING WILL REQUIRE A LOT OF TIME DUE TO THE FOR LOOP FOR EXPORT. 
+// Read the instructions below.
+// ########################################################################################
 
 // It is advised to export around 3-4 datasets at once, otherwise it
-// could freeze your browser
+// could freeze your browser.
+// Therefore, first set, which datasets you would like to export first.
+// Set the selected datasets on lines 188-195 by commenting or uncommenting lines.
 
 // Set start and end dates - it is advised to export at max around 10 years of data
 var startDate = '2010-01-01';
