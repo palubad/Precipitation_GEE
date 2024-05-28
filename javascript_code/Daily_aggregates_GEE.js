@@ -1,7 +1,32 @@
-// RUN WILL REQUIRE MUCH TIME DUE TO THE FOR LOOP
+/*
+Author of the code: Daniel Paluba
+(For more info contact: palubad@natur.cuni.cz)
 
+This code is free and open. 
+By using this code and any data derived with it, 
+you agree to cite the following reference 
+in any publications and outputs derived from them:
+ 
+    Paluba, D., V., Bližňák, M., Müller, P., Štych (2024): 
+    Evaluation of Precipitation Datasets Available in Google Earth Engine on a Daily Basis for Czechia.
+    Submitted to the Conference of the IEEE IGARSS 2024.
+
+
+###########################################################################################################
+*/
+
+
+// CAUTION: RUN WILL REQUIRE MUCH TIME DUE TO THE FOR LOOP. Read the instructions below.
+
+// It is advised to export around 3-4 datasets at once, otherwise it
+// could freeze your browser
+
+// Set start and end dates - it is advised to export at max around 10 years of data
 var startDate = '2010-01-01';
 var endDate = '2022-01-01';
+
+// Load your input rain gauge stations or any geometry (in this case, 117 rain gauges in Czechia)
+var stanice_full = ee.FeatureCollection("users/danielp/Weather/stanice_update2024");
 
 // load the the datasets
 var ERA5_Land = ee.ImageCollection("ECMWF/ERA5_LAND/HOURLY").select('total_precipitation_hourly')
