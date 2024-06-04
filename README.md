@@ -1,8 +1,8 @@
 # Precipitation dataset comparison in GEE
 Supplementary material (code and data) for the article submitted for IGARSS 2024, entitled [_**Evaluation of precipitation datasets available in Google Earth Engine on a daily basis for Czechia**_](https://www.researchgate.net/publication/380929888_Evaluation_of_Precipitation_Datasets_Available_in_Google_Earth_Engine_on_a_Daily_Basis_for_Czechia).
 
-Currently, the submitted version is available on ArXiv preprint server:
-Paluba et al. (2024): Evaluation of precipitation datasets available in Google Earth Engine on a daily basis for Czechia. DOI:
+Currently, the submitted version is available on ResearchGate as preprint:
+Paluba et al. (2024): Evaluation of precipitation datasets available in Google Earth Engine on a daily basis for Czechia. [DOI: 10.13140/RG.2.2.12929.88160](http://dx.doi.org/10.13140/RG.2.2.12929.88160)
 
 For this analysis, 117 rain gauge stations from the Czech Hydrometeorological Institute (CHMI), which share both precipitation and temperature measurements with data availability from 2001 until 2021. Data used in this study can be found in _data/Rain_gauge_stations.csv_ file.
 
