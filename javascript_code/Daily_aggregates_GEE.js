@@ -27,8 +27,8 @@ in any publications and outputs derived from them:
 // Set the selected datasets on lines 188-195 by commenting or uncommenting lines.
 
 // Set start and end dates - it is advised to export at max around 10 years of data
-var startDate = '2010-01-01';
-var endDate = '2022-01-01';
+var startDate = '2001-01-01';
+var endDate = '2010-01-01';
 
 // Load your input rain gauge stations or any geometry (in this case, 117 rain gauges in Czechia)
 var stanice_full = ee.FeatureCollection("users/danielp/Weather/stanice_update2024");
@@ -50,6 +50,10 @@ PERSIANN = PERSIANN.merge(ee.ImageCollection([ee.Image(0).rename('precipitation'
 // print(PERSIANN)
 
 var GPM = ee.ImageCollection('NASA/GPM_L3/IMERG_V06').select('precipitationCal') // half-hourly
+              .filterDate(startDate, endDate);
+// GPM starts at 00:00 current day and ends at 00:30 for 00:00 image
+
+var GPM_uncal = ee.ImageCollection('NASA/GPM_L3/IMERG_V06').select('precipitationUncal') // half-hourly
               .filterDate(startDate, endDate);
 // GPM starts at 00:00 current day and ends at 00:30 for 00:00 image
 
@@ -161,6 +165,10 @@ print(GLDAS.filter(ee.Filter.date(GLDAScurrentDay, GLDASnextDay)));
     var precipitationGPM = GPM
                   .filter(ee.Filter.date(currentDate_hourly, nextDay_hourly)).reduce(ee.Reducer.sum(), 16)
                   .rename('precipitationGPM');
+    
+    var precipitationGPM_uncal = GPM_uncal
+                  .filter(ee.Filter.date(currentDate_hourly, nextDay_hourly)).reduce(ee.Reducer.sum(), 16)
+                  .rename('precipitationGPM_uncal');
 
     var precipitationGSMAP = GSMAP
                   .filter(ee.Filter.date(currentDate_hourly, nextDay_hourly)).reduce(ee.Reducer.sum(), 16)
@@ -188,8 +196,9 @@ print(GLDAS.filter(ee.Filter.date(GLDAScurrentDay, GLDASnextDay)));
                               // precipitationERA5_Land,
                               // precipitationPERSIANN,
                               // precipitationGPM,
+                              precipitationGPM_uncal,
                               // precipitationGSMAP,
-                              precipitationGSMAP_adj,
+                              // precipitationGSMAP_adj,
                               // precipitationGLDAS,
                               // precipitationCPC,
                               // precipitationAgERA5
