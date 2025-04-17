@@ -9,9 +9,9 @@ By using this code and any data derived with it,
 you agree to cite the following reference 
 in any publications and outputs derived from them:
  
-    Paluba, D., V., Bližňák, M., Müller, P., Štych (2024): 
-    Evaluation of Precipitation Datasets Available in Google Earth Engine on a Daily Basis for Czechia.
-    Submitted to the IEEE IGARSS 2024 Conference proceedings.
+    Paluba, D., V., Bližňák, M., Müller, P., Štych (2025): 
+    Evaluation of ten satellite-based and reanalysis precipitation datasets on a daily basis for Czechia (2001-2021)
+    DOI: http://dx.doi.org/10.13140/RG.2.2.12929.88160
     
 ###########################################################################################
 */
@@ -24,7 +24,7 @@ in any publications and outputs derived from them:
 // It is advised to export around 3-4 datasets at once, otherwise it
 // could freeze your browser.
 // Therefore, first set, which datasets you would like to export first.
-// Set the selected datasets on lines 188-195 by commenting or uncommenting lines.
+// Set the selected datasets on lines 199-207 by commenting or uncommenting lines.
 
 // Set start and end dates - it is advised to export at max around 10 years of data
 var startDate = '2001-01-01';
@@ -49,12 +49,14 @@ PERSIANN = PERSIANN.merge(ee.ImageCollection([ee.Image(0).rename('precipitation'
                             .setMulti({'system:time_start':1625702400000,'system:time_end':1625788800000,'system:index':'1_20210708'})]))
 // print(PERSIANN)
 
-var GPM = ee.ImageCollection('NASA/GPM_L3/IMERG_V06').select('precipitationCal') // half-hourly
-              .filterDate(startDate, endDate);
+var GPM = ee.ImageCollection('NASA/GPM_L3/IMERG_V07').select('precipitation') // half-hourly
+              .filterDate(startDate, endDate)//.map(function(image){return image.divide(2)});
 // GPM starts at 00:00 current day and ends at 00:30 for 00:00 image
 
-var GPM_uncal = ee.ImageCollection('NASA/GPM_L3/IMERG_V06').select('precipitationUncal') // half-hourly
-              .filterDate(startDate, endDate);
+var GPM_uncal = ee.ImageCollection('NASA/GPM_L3/IMERG_V07')
+              .filter(ee.Filter.listContains("system:band_names", "precipitationUncal"))
+              .select('precipitationUncal') // half-hourly
+              .filterDate(startDate, endDate)//.map(function(image){return image.divide(2)});
 // GPM starts at 00:00 current day and ends at 00:30 for 00:00 image
 
 var GSMAP = ee.ImageCollection('JAXA/GPM_L3/GSMaP/v8/operational') 
@@ -76,8 +78,9 @@ var agera5_ic = ee.ImageCollection('projects/climate-engine-pro/assets/ce-ag-era
 // IMPORTANT: This dataset was excluded from the analysis due to massive overestimation at 
 // the time of paper submission.
 var cmorph_ic = ee.ImageCollection('projects/climate-engine-pro/assets/noaa-cpc-cmorph/daily')
-              .filterDate(startDate, endDate).select('precip');
+              .filterDate(startDate, endDate).select('precip')//.map(function(image){return image.divide(10)});
 // print(CHIRPS.limit(10), PERSIANN.limit(10), GPM.limit(10), GLDAS.limit(10))
+
 
 
 // Set the starting date
@@ -195,8 +198,8 @@ print(GLDAS.filter(ee.Filter.date(GLDAScurrentDay, GLDASnextDay)));
     var selected_datasets = [
                               // precipitationERA5_Land,
                               // precipitationPERSIANN,
-                              // precipitationGPM,
-                              precipitationGPM_uncal,
+                              precipitationGPM,
+                              // precipitationGPM_uncal,
                               // precipitationGSMAP,
                               // precipitationGSMAP_adj,
                               // precipitationGLDAS,
