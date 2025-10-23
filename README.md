@@ -1,12 +1,12 @@
 # Precipitation dataset comparison in GEE
-Supplementary material (code and data) for the preprint article, entitled [_**Evaluation of ten satellite-based and reanalysis precipitation datasets on a daily basis for Czechia (2001-2021)**_](http://dx.doi.org/10.13140/RG.2.2.12929.88160) by Paluba, D., Bližňák, V., Müller, M. & Štych, P. (2025).
+Supplementary material (code and data) for the article, entitled [_**Evaluation of ten satellite-based and reanalysis precipitation datasets on a daily basis for Czechia (2001-2021)**_](http://dx.doi.org/10.13140/RG.2.2.12929.88160) by Paluba, D., Bližňák, V., Müller, M. & Štych, P. (2025) [currently only as a preprint].
 
 Full citation:
 > Paluba, D., Vojtěch Bližňák, Müller, M., & Premysl Stych. (2025). Evaluation of ten satellite-based and reanalysis precipitation datasets on a daily basis for Czechia (2001-2021). Preprint. https://doi.org/10.13140/RG.2.2.12929.88160
 
-For this analysis, 117 rain gauge stations from the Czech Hydrometeorological Institute (CHMI), which share both precipitation and temperature measurements with data availability from 2001 until 2021. Data used in this study can be found in _data/Rain_gauge_stations.csv_ file.
+For this analysis, 96 rain gauge stations from the Czech Hydrometeorological Institute (CHMI), which share both precipitation and temperature measurements with data availability from 2001 until 2021. Data used in this study can be found in _data/Rain_gauge_stations.csv_ file.
 
-![image](https://github.com/user-attachments/assets/ae6b8d58-f68a-4999-ae03-db52b11ffef4)
+![image](https://github.com/user-attachments/assets/d35a50c5-9770-4340-819d-5af34ea3cb61)
 Fig. 1 Spatial distribution of rain gauge stations in Czechia.
 
 Ten global and quasi-global precipitation datasets were selected for the evaluation in this work. Only datasets that cover the area of Czechia and are available in the selected time period of 2001-2021 were considered. Eight datasets are available directly from the official Earth Engine Data Catalog: 
@@ -28,14 +28,16 @@ The spatial resolution of the datasets ranges from 5,566 to 27,830 meters, while
 Precipitation datasets available in half-hourly, hourly and three-hourly temporal resolution were aggregated to daily composites in GEE. For these datasets, the starting and ending period was set from 6:00 UTC to 6:00 UTC the next day, to meet the measurement period of the in-situ gauge stations of the CHMI. For each dataset, time series were then extracted and exported at a daily time step at the locations of the rain gauge stations for the period 2001-2021.
 
 Table I. Characteristics of the used datasets.
-![image](https://github.com/user-attachments/assets/6dece563-d07a-4e26-be77-a53d0c8751ab)
-Notes: 1° at the equator = 111.1 km; * data available only for the land; ** data available only for the land, except Antarctica; 1 current delay in GEE is 6 months (due 1 July 2024); 2 however, reported 2 days in the documentation; S=satellite, GA=gauge-adjusted, RA=re-analysis products. 
-Sources: [1] - (Huffman et al., 2023); [2] - (Kubota et al., 2020); [3] - (Mega et al., 2019); [4] - (Copernicus Climate Change Service, 2019b); [5] - (Rodell et al., 2004); [6-7] - (Ashouri et al., 2015; Sorooshian et al., 2014); [8] - (Funk et al., 2015); [9] - (Pingping Xie et al., 2018); [10] - (Copernicus Climate Change Service, 2019a).
+![image](https://github.com/user-attachments/assets/285f6c90-f51a-4008-a91c-d0a99043df15)
+Notes: 1° at the equator = 111.1 km; * data available only for the land; ** data available only for the land, except Antarctica, † data available only up to 50° latitude; 1 current delay in GEE is 10 months (due 1 August 2025), opposed to 3 months stated in the dataset documentation (Sorooshian et al., 2014); 2 however, reported 2 days in the documentation; prov.=provisional, that is when the product was first made available, perm.=permanent, when the final run has been finished and the provisional product has been replaced; S=satellite, GA=gauge-adjusted, RA=re-analysis products. 
+Sources: [1] - (Huffman et al., 2023); [2] - (Kubota et al., 2020); [3] - (Mega et al., 2019); [4] - (Muñoz-Sabater, 2019); [5] - (Rodell et al., 2004); [6-7] - (Ashouri et al., 2015; Sorooshian et al., 2014); [8] - (Funk et al., 2015); [9] - (Pingping et al., 2018); [10] - (Copernicus Climate Change Service, 2019).
 
 > GPM products are in mm/30 minutes, therefore they need to be divided by 2 to get mm/hour.
 > CPC-CMORPH, accessible from the Awesome GEE Community Catalog at https://gee-community-catalog.org/projects/cpc_morph/ is needed to be divided by 10, as of 17.4.2025, because there is an error in calculation.
 
 Comment regarding the attached data in the _data_ folder:
-Data for each dataset are divided into 2 parts: 
+Data for each raw dataset (as exported from GEE) are divided into 2 parts: 
 1. the first part repesent time series for each of the 117 rain gauges for the period from 2001-01-01 to 2010-01-01, ending with __1_10_
 2. the second part repesent time series for each of the 117 rain gauges for the period from 2010-01-01 to 2022-01-01 __10_22_
+
+#### Datasets included in the data_for_analysis folder represent the preprocessed and cleaned datasets used for further analysis.
