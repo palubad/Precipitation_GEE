@@ -7,7 +7,8 @@ Full citation:
 For this analysis, 96 rain gauge stations from the Czech Hydrometeorological Institute (CHMI), which share both precipitation and temperature measurements with data availability from 2001 until 2021. Data used in this study can be found in _data/Rain_gauge_stations.csv_ file.
 
 ![image](https://github.com/user-attachments/assets/d35a50c5-9770-4340-819d-5af34ea3cb61)
-Fig. 1 Spatial distribution of rain gauge stations in Czechia.
+Figure 1. Spatial distribution of the selected 96 rain gauge stations in Czechia (a) classified by elevation categories, the hypsographic curve for Czechia with station elevations overlaid (b), and comparison of the elevation distribution and station shares across four elevation categories (c).
+
 
 Ten global and quasi-global precipitation datasets were selected for the evaluation in this work. Only datasets that cover the area of Czechia and are available in the selected time period of 2001-2021 were considered. Eight datasets are available directly from the official Earth Engine Data Catalog: 
 - uncalibrated IMERG V07 product from the GPM: Global Precipitation Measurement (GPMunCal) (Huffman et al., 2023)
