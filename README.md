@@ -1,11 +1,10 @@
 # Precipitation dataset comparison in GEE
-Supplementary material (code and data) for the article, entitled [_**Evaluation of ten satellite-based and reanalysis precipitation datasets on a daily basis for Czechia (2001-2021)**_](http://dx.doi.org/10.13140/RG.2.2.12929.88160) by Paluba, D., Bližňák, V., Müller, M. & Štych, P. (2025) [currently only as a preprint].
+Supplementary material (code and data) for the article, entitled [_**Evaluation of ten satellite-based and reanalysis precipitation datasets on a daily basis for Czechia (2001-2021)**_](https://doi.org/10.1080/20964471.2025.2592444) by Paluba, D., Bližňák, V., Müller, M. & Štych, P. (2025), published in Big Earth Data journal. DOI: 10.1080/20964471.2025.2592444.
 
 Full citation:
-> Paluba, D., Vojtěch Bližňák, Müller, M., & Premysl Stych. (2025). Evaluation of ten satellite-based and reanalysis precipitation datasets on a daily basis for Czechia (2001-2021). Preprint. https://doi.org/10.13140/RG.2.2.12929.88160
+> Paluba, D., Bližňák, V., Müller, M., & Štych, P. (2025). Evaluation of ten satellite-based and reanalysis precipitation datasets on a daily basis for Czechia (2001–2021). Big Earth Data, 1–30. [https://doi.org/10.1080/20964471.2025.2592444](https://doi.org/10.1080/20964471.2025.2592444)
 
-For this analysis, 96 rain gauge stations from the Czech Hydrometeorological Institute (CHMI), which share both precipitation and temperature measurements with data availability from 2001 until 2021. Data used in this study can be found in _data/Rain_gauge_stations.csv_ file.
-
+For this analysis, 96 rain gauge stations from the Czech Hydrometeorological Institute (CHMI), which share both precipitation and temperature measurements with data availability from 2001 until 2021. More information on provided data can be found in the [**Provided data section**](https://github.com/palubad/Precipitation_GEE/edit/main/README.md#provided-data) of this documentation.
 ![image](https://github.com/user-attachments/assets/d35a50c5-9770-4340-819d-5af34ea3cb61)
 Figure 1. Spatial distribution of the selected 96 rain gauge stations in Czechia (a) classified by elevation categories, the hypsographic curve for Czechia with station elevations overlaid (b), and comparison of the elevation distribution and station shares across four elevation categories (c).
 
@@ -36,9 +35,30 @@ Sources: [1] - (Huffman et al., 2023); [2] - (Kubota et al., 2020); [3] - (Mega 
 > GPM products are in mm/30 minutes, therefore they need to be divided by 2 to get mm/hour.
 > CPC-CMORPH, accessible from the Awesome GEE Community Catalog at https://gee-community-catalog.org/projects/cpc_morph/ is needed to be divided by 10, as of 17.4.2025, because there is an error in calculation.
 
-Comment regarding the attached data in the _data_ folder:
-Data for each raw dataset (as exported from GEE) are divided into 2 parts: 
-1. the first part repesent time series for each of the 117 rain gauges for the period from 2001-01-01 to 2010-01-01, ending with __1_10_
-2. the second part repesent time series for each of the 117 rain gauges for the period from 2010-01-01 to 2022-01-01 __10_22_
+# Provided data
+The [data folder](https://github.com/palubad/Precipitation_GEE/tree/main/data) includes processed both precipitation datasets and validation datasets from gauge stations.
+1. The [data_for_analysis subfolder](https://github.com/palubad/Precipitation_GEE/tree/main/data/data_for_analysis) contains time series of precipitation data derived from GEE for each CHMI gauge station and tested precipitation product. Each precipitation product has its own file, e.g. AGERA5.csv stands for the AgERA5 datasets time series for 2001-2021 for each CHMI gauge station. The _ID_1_ row represents the ID of the gauge station, using which the user can join the dataset estimates with gauge station measurements, attached in the _CHMI_station_data_2001-2021.csv_ file.
+2. The _Rain_gauge_stations.xls_ file includes information about the CHMI gauge stations, such as elevation, full name or years of measurements. It also includes their geolocation, X and Y coordinates.
+3. The _CHMI_station_data_2001-2021.csv_ file includes the IDs of each CHMI gauge station and their time series of precipitation measurements from 2001 to 2011.
+4. The [daily_means subfolder](https://github.com/palubad/Precipitation_GEE/tree/main/data/daily_means) includes data supporting the analysis of daily precipitaiton means for each evaluated dataset, described in the [3.2. Spatial consistency assessment part of our paper](https://doi.org/10.1080/20964471.2025.2592444). 
 
-#### Datasets included in the data_for_analysis folder represent the preprocessed and cleaned datasets used for further analysis.
+# Provided code for data preparation and processing in Google Earth Engine
+This Google Earth Engine (GEE) script in the [javasctipt_code folder](https://github.com/palubad/Precipitation_GEE/tree/main/javascript_code) is designed to extract and export daily precipitation data from multiple satellite-based and reanalysis datasets for a set of rain gauge stations in Czechia.
+
+**Station input:**
+- User-provided FeatureCollection of rain gauges (stanice_full)
+- Only the selected stations are used to generate time series
+
+**Temporal processing:**
+- Data are aggregated to daily totals where necessary
+- Handles different temporal resolutions (hourly, 3-hourly, half-hourly, daily)
+- Supports flexible start and end dates
+
+**Output:**
+- For each day and dataset, a multi-band ImageCollection is created
+- Precipitation values are extracted for all stations using spatial reduction (mean)
+- Data are exported as tables to Google Drive
+
+**Usage considerations:**
+- Large datasets or long time ranges may cause long processing times or browser freezing
+- Recommended to export 3–4 datasets at a time and limit periods to ~10 years per run
