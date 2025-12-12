@@ -4,7 +4,7 @@ Supplementary material (code and data) for the article, entitled [_**Evaluation 
 Full citation:
 > Paluba, D., Bližňák, V., Müller, M., & Štych, P. (2025). Evaluation of ten satellite-based and reanalysis precipitation datasets on a daily basis for Czechia (2001–2021). Big Earth Data, 1–30. [https://doi.org/10.1080/20964471.2025.2592444](https://doi.org/10.1080/20964471.2025.2592444)
 
-For this analysis, 96 rain gauge stations from the Czech Hydrometeorological Institute (CHMI), which share both precipitation and temperature measurements with data availability from 2001 until 2021. More information on provided data can be found in the [**Provided data section**](https://github.com/palubad/Precipitation_GEE/edit/main/README.md#provided-data) of this documentation.
+For this analysis, 96 rain gauge stations from the Czech Hydrometeorological Institute (CHMI), which share both precipitation and temperature measurements with data availability from 2001 until 2021. More information on provided data can be found in the [**Provided data section**](#provided-data) of this documentation.
 ![image](https://github.com/user-attachments/assets/d35a50c5-9770-4340-819d-5af34ea3cb61)
 Figure 1. Spatial distribution of the selected 96 rain gauge stations in Czechia (a) classified by elevation categories, the hypsographic curve for Czechia with station elevations overlaid (b), and comparison of the elevation distribution and station shares across four elevation categories (c).
 
